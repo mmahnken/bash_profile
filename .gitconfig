@@ -1,0 +1,27 @@
+[user]
+  email = lindsay.cade@ucsf.edu
+  name = Lindsay
+
+[alias]
+    br  = branch
+    c   = commit
+    co  = checkout
+    cp  = cherry-pick
+    d   = diff --color
+    dc  = diff --color --cached
+    l   = log --pretty=format:'%h %s (%cn)%n' --decorate --stat --graph --color
+    pom = push origin master
+    s   = status
+    sh  = show --color
+    up  = pull --rebase
+    co = checkout
+    st = status
+    current-branch = rev-parse --symbolic-full-name --abbrev-ref HEAD
+    shove = "!f() { H=$(git current-branch) && git push -u origin $H; }; f"
+    ignore = update-index --assume-unchanged
+    unignore = update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep "^[[:lower:]]"
+[core]
+          excludesfile = /Users/LC/.gitignore
+[color]
+          ui = auto
