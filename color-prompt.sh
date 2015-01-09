@@ -15,7 +15,7 @@ if [ -n "$force_color_prompt" ]; then
   # a case would tend to support setf rather than setaf.)
   color_prompt=yes
     else
-  color_prompt=
+  color_prompt=yes
     fi
 fi
 
@@ -46,12 +46,13 @@ function setsymbols() {
   local end_sym=\$
   local usegit=1
   local id=`/usr/bin/id -u`
+  local currenthour=$(date +%-H)
   [[ $id == 0 ]] && end_sym=\#
   if [ $exit_status = 0 ]; then
     if [[ $id == 0 ]]; then
-      color_exit="$C_LIGHTBLUE"; color_exit2="$C_BLUE"; color_exit3="$C_WHITE";exit_emoji=💜;
+      color_exit="$C_LIGHTBLUE"; color_exit2="$C_BLUE"; color_exit3="$C_WHITE";
     else
-      color_exit="$C_LIGHTGREEN"; color_exit2="$C_GREEN"; color_exit3="$C_LIGHTBLUE";exit_emoji=💜;
+      color_exit="$C_LIGHTBLUE"; color_exit2="$C_DEFAULT"; color_exit3="$C_LIGHTBLUE";
     fi
     usym=":"
   else
@@ -61,6 +62,11 @@ function setsymbols() {
       color_exit="$C_LIGHTRED"; color_exit2="$C_RED"; color_exit3="$C_LIGHTCYAN";exit_emoji=💩;
     fi
     usym="!"
+  fi
+  if (("$currenthour" > 18)); then
+    exit_emoji=🌙;
+  else
+    exit_emoji=🌵;
   fi
   PS1="${VIRTUAL_ENV:+$C_PURPLE($(basename $VIRTUAL_ENV)) }${C_DEFAULT}${exit_emoji}  \
 ${color_exit}\u\
